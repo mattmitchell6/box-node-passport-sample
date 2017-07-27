@@ -2,7 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var mongoose = require('mongoose');
 
-var strategy = require('./identity-service/strategy.js');
+var strategy = require('./identity-service/passportStrategy.js');
 var MongooseConfig = require('config').MongooseConfig;
 
 // Create a new Express application.

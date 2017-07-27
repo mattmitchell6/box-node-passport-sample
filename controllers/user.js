@@ -8,7 +8,7 @@ var authentication = require('connect-ensure-login');
 
 var User = require('../models/users');
 
-router.get('/login', function(req, res){
+router.get('/login', function(req, res) {
   res.render('login');
 });
 
@@ -21,25 +21,25 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', function(req, res) {
-  User.register(
-    new User({username: req.body.username, boxId: 'box id here'}), req.body.password, function(err, user) {
-    if (err) {
-      res.redirect('/user/signup');
-    } else {
+  var userInfo = req.body;
+
+  // create new app user and db user
+  User.newUser(userInfo)
+    .then((user) => {
+      console.log("Successfully created new user");
       passport.authenticate('local') (req, res, function() {
-        res.redirect('/user/profile');
+        res.redirect('/profile');
       });
-    }
-  });
+    })
+    .catch((error) => {
+      console.log("Error could not create user - ", error.message);
+      res.redirect('/user/signup');
+    });
 });
 
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
-});
-
-router.get('/profile', authentication.ensureLoggedIn(), function(req, res) {
-  res.render('profile', { user: req.user });
 });
 
 module.exports = router;
