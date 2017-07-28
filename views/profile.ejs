@@ -1,6 +1,24 @@
+<head>
+  <!-- Latest version of the explorer css for your locale -->
+  <link rel="stylesheet" href="https://cdn01.boxcdn.net/platform/elements/1.0.2/en-US/explorer.css" />
+</head>
+
 <p>
 ID: <%= user.id %><br/>
 Username: <%= user.username %><br/>
 Box ID: <%= user.boxId %><br/>
 </p>
 <a href="/user/logout">Log out</a>
+
+<div class="explorer-container"></div>
+
+<!-- Latest version of the explorer js for your locale -->
+<script src="https://cdn01.boxcdn.net/platform/elements/1.0.2/en-US/explorer.js"></script>
+<script>
+    var folderId = '0';
+    var accessToken = '<%= user.token %>';
+    var contentExplorer = new Box.ContentExplorer();
+    contentExplorer.show(folderId, accessToken, {
+        container: '.explorer-container'
+    });
+</script>

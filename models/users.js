@@ -14,29 +14,18 @@ userSchema.plugin(PassportLocalMongoose);
 
 // create new app user and add user to database
 userSchema.statics.newUser = function(user) {
-  var client = BoxUtils.serviceAccountClient();
-
   // check if user with submitted name exists
-  return new Promise((resolve, reject) => {
-    User.findOne({username: user.username}, function(err, user) {
-      if(err) {
-        reject(err);
+  return User.findOne({username: user.username})
+    .then((user) => {
+      if(user) {
+        throw new Error('user already exists');
       } else {
-        if(!user) {
-          resolve();
-        } else {
-          reject({message: "user already exists"});
-        }
+        return;
       }
-    });
-  })
+    })
   // create Box app user
   .then(() => {
-    return new Promise((resolve, reject) => {
-      client.enterprise.addAppUser(user.username, null)
-        .then((boxAppUser) => { resolve(boxAppUser.id); })
-        .catch((err) => { reject(err); });
-    });
+    return BoxUtils.newAppUser(user.username);
   })
   // add new user to database
   .then((boxAppUserId) => {
