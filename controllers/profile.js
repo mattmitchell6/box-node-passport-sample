@@ -6,13 +6,11 @@ var router = express.Router();
 
 var BoxUtils = require('../box-service/boxUtils');
 
-// fetch app user token
+// fetch app user token and info
 router.get('/', function(req, res) {
   BoxUtils.getAppUserToken(req.user.boxId)
     .then(token => {
       req.user.token = token;
-    })
-    .then(() => {
       return BoxUtils.getUserInfo(req.user.boxId);
     })
     .then((appUser) => {

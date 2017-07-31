@@ -5,15 +5,15 @@
 
 <h2 class="text-center mtm">Welcome, <%= user.username %></h2>
 <div class="grid-x grid-padding-x mtm">
-	<div class="cell small-12 medium-4 large-3">
-    <h4>Stored User Info</h4>
+	<div class="cell small-12 medium-6 large-4">
+    <h4>Stored User Info (in mongoDB)</h4>
     <p>
       id: <%= user.id %><br/>
       username: <%= user.username %><br/>
-      Box App User id: <%= user.boxId %><br/>
+      boxId: <%= user.boxId %><br/>
     </p>
 
-		<h4>Box App User</h4>
+		<h4>Box App User (from API call)</h4>
     <p>
       id: <%= appUser.id %><br/>
       name: <%= appUser.name %><br/>
@@ -22,7 +22,7 @@
     </p>
   </div>
   <div class="cell auto">
-    <h4>Box Content Explorer</h4>
+    <h4>Box Content Explorer (token: <%= user.token %>)</h4>
     <div class="explorer-container"></div>
   </div>
 </div>
