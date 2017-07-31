@@ -6,13 +6,20 @@
 <h2 class="text-center mtm">Welcome, <%= user.username %></h2>
 <div class="grid-x grid-padding-x mtm">
 	<div class="cell small-12 medium-4 large-3">
-    <h4>User Information</h4>
+    <h4>Stored User Info</h4>
     <p>
-      ID: <%= user.id %><br/>
-      Username: <%= user.username %><br/>
-      Box App User ID: <%= user.boxId %><br/>
+      id: <%= user.id %><br/>
+      username: <%= user.username %><br/>
+      Box App User id: <%= user.boxId %><br/>
     </p>
 
+		<h4>Box App User</h4>
+    <p>
+      id: <%= appUser.id %><br/>
+      name: <%= appUser.name %><br/>
+      login: <%= appUser.login %><br/>
+			created_at: <%= appUser.created_at %><br/>
+    </p>
   </div>
   <div class="cell auto">
     <h4>Box Content Explorer</h4>

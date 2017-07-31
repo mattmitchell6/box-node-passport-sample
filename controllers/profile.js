@@ -11,7 +11,12 @@ router.get('/', function(req, res) {
   BoxUtils.getAppUserToken(req.user.boxId)
     .then(token => {
       req.user.token = token;
-      res.render('profile', { user: req.user });
+    })
+    .then(() => {
+      return BoxUtils.getUserInfo(req.user.boxId);
+    })
+    .then((appUser) => {
+      res.render('profile', { user: req.user, appUser: appUser});
     })
     .catch(err => {
       console.log("Error:", err.message);

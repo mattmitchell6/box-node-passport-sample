@@ -24,7 +24,7 @@ module.exports = {
     return serviceAccountClient.enterprise.addAppUser(username, null)
       .then(user => user.id)
       .catch(err => {
-        throw new Error('could not create app user')
+        throw new Error(err)
       });
   },
   // get app user access token
@@ -38,5 +38,15 @@ module.exports = {
         }
       });
     });
+  },
+  // get current app user info
+  getUserInfo: function(appUserId) {
+    var client = this.appUserClient(appUserId);
+
+    return client.users.get(client.CURRENT_USER_ID)
+      .then(user => user)
+      .catch(err => {
+        throw new Error("could not get app user info");
+      });
   }
 }
