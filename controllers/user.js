@@ -33,7 +33,7 @@ router.post('/signup', function(req, res) {
     })
     .catch((error) => {
       console.log("Error could not create user - ", error.message);
-      res.redirect('/user/signup');
+      res.render('signup', {error: error.message});
     });
 });
 

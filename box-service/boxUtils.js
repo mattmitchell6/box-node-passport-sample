@@ -31,7 +31,7 @@ module.exports = {
   getAppUserToken: function(appUserId) {
     return new Promise((resolve, reject) => {
       BoxSdk.getAppUserTokens(appUserId, function(err, tokens) {
-        if(err) {
+        if (err) {
           reject(err);
         } else {
           resolve(tokens.accessToken);

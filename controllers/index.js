@@ -10,10 +10,10 @@ router.use('/profile', ensureLoggedIn, require('./profile'))
 router.use('/user', require('./user'));
 
 router.get('/', function(req, res) {
-  if(req.user) {
+  if (req.user) {
     res.redirect('/profile');
   } else {
-    res.render('home');
+    res.render('home', {user: req.user});
   }
 });
 

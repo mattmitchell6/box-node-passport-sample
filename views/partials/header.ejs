@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Box Node Boilerplate</title>
+
+    <%# local foundation styles and js %>
+    <link rel="stylesheet" href="/foundation-6.4.1/css/foundation.min.css">
+    <script src="/foundation-6.4.1/js/vendor/jquery.js"></script>
+    <script src="/foundation-6.4.1/js/vendor/foundation.min.js"></script>
+    <script src="/foundation-6.4.1/js/app.js"></script>
+
+    <%# local scss %>
+    <link rel="stylesheet" href="/css/base.css">
+  </head>
+
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text"><a href="/">Box Node.js Boilerplate</a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <% if (locals.user) { %>
+            <a href="/user/logout">Log Out</a>
+          <% } else { %>
+            <a href="/user/login">Log In</a>
+          <% } %>
+        </ul>
+      </div>
+    </div>

@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var mongoose = require('mongoose');
+var path = require('path');
 
 var strategy = require('./identity-service/passportStrategy.js');
 var MongooseConfig = require('config').MongooseConfig;
@@ -16,6 +17,7 @@ app.set('view engine', 'ejs');
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());
