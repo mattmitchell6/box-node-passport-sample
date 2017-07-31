@@ -1,15 +1,16 @@
 {
-  "name": "express-4.x-local-example",
+  "name": "box-node-boilerplate",
   "version": "0.0.0",
-  "description": "Express 4.x app using Passport for authentication with username and password.",
+  "description": "Boilerplate app that gets you up and running with Box Platform and authentication",
   "scripts": {
-    "start": "nodemon app.js",
-    "watch-css": "catw -c 'styles/**/*.css' -o public/css/bundle.css -v",
-    "watch-js": "watchify styles/foundation-6.4.1/**/*.js -o public/js/bundle.js -dv",
+    "watch-css": "catw ./styles/foundation-6.4.1/css/*.css ./styles/css/*.css -o public/css/bundle.css -dv",
+    "watch-js": "watchify ./styles/foundation-6.4.1/js/*.js ./styles/js/*.js -o public/js/bundle.js -dv",
     "watch": "npm run watch-css & npm run watch-js",
-    "build-css": "catw -c 'lessc -' './styles/foundation-6.4.1/**/*.css' > ./public/css/bundle.css",
-    "build-js": "browserify ./styles/foundation-6.4.1/**/*.js > ./public/js/bundle.js",
-    "build": "npm run build-css && npm run build-js"
+    "build-css": "cat ./styles/foundation-6.4.1/css/*.css ./styles/css/*.css > ./public/css/bundle.css",
+    "build-js": "browserify ./styles/foundation-6.4.1/js/*.js ./styles/js/*.js > ./public/js/bundle.js",
+    "build": "npm run build-css && npm run build-js",
+    "start": "npm run build && nodemon app.js",
+    "start-dev": "npm run watch & npm start"
   },
   "author": "Matt Mitchell",
   "license": "MIT",
@@ -30,6 +31,8 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "catw": "^1.0.1"
+    "cat": "^0.2.0",
+    "catw": "^1.0.1",
+    "watchify": "^3.9.0"
   }
 }
