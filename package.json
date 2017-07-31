@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "description": "Express 4.x app using Passport for authentication with username and password.",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "watch-css": "catw -c 'styles/**/*.css' -o public/css/bundle.css -v",
+    "watch-js": "watchify styles/foundation-6.4.1/**/*.js -o public/js/bundle.js -dv",
+    "watch": "npm run watch-css & npm run watch-js",
+    "build-css": "catw -c 'lessc -' './styles/foundation-6.4.1/**/*.css' > ./public/css/bundle.css",
+    "build-js": "browserify ./styles/foundation-6.4.1/**/*.js > ./public/js/bundle.js",
+    "build": "npm run build-css && npm run build-js"
   },
   "author": "Matt Mitchell",
   "license": "MIT",
@@ -22,5 +28,8 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "catw": "^1.0.1"
   }
 }
