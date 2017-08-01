@@ -2,12 +2,6 @@
 
 <div class="grid-x">
 	<div class="mtm cell small-12 medium-8 large-4 large-offset-4 medium-offset-2">
-		<% if(locals.error) { %>
-			<div class="alert callout">
-				<p>Error: <%= error %></p>
-			</div>
-		<% } %>
-
 		<h4 class="text-center">Submit your username / password</h4>
 		<form action="/user/login" method="post">
 			<div>

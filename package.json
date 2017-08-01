@@ -1,7 +1,7 @@
 {
   "name": "box-node-boilerplate",
   "version": "0.0.0",
-  "description": "Boilerplate app that gets you up and running with Box Platform and authentication",
+  "description": "Boilerplate app that gets you up and running with Box Platform and user authentication",
   "scripts": {
     "watch": "watchify styles/css/style.js -t scssify styles/js/*.js -o public/bundle.js -dv",
     "build": "browserify styles/css/style.js -t scssify styles/js/*.js > public/bundle.js",

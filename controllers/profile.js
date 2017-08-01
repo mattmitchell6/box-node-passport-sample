@@ -22,4 +22,18 @@ router.get('/', function(req, res) {
     });
 });
 
+router.post('/create-folder', function(req, res) {
+  var folderName = req.body.folderName;
+  var appUserClient = BoxUtils.appUserClient(req.user.boxId)
+
+  appUserClient.folders.create('0', folderName)
+    .then((folder) => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err.response.body.status + ": " + err.response.body.code);
+      res.redirect('/');
+    });
+});
+
 module.exports = router;
