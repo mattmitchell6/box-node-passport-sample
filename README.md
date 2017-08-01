@@ -2,7 +2,7 @@ This sample demonstrates how to use get a simple Box Platform app up and running
 and [Passport](http://passportjs.org/) to authenticate users.
 
 ## Prerequisites
-[Mongodb](https://treehouse.github.io/installation-guides/mac/mongo-mac.html) [Browserfy](http://browserify.org/)
+[Mongodb](https://treehouse.github.io/installation-guides/mac/mongo-mac.html) [Browserify](http://browserify.org/)
 
 ## Instructions
 

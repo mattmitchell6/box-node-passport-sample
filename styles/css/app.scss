@@ -1,2 +1,6 @@
-@import "../foundation-6.4.1/css/foundation.min";
+// base
 @import "base/base";
+@import "base/variables";
+
+// components
+@import "components/navigation";
