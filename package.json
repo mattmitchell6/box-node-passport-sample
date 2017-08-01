@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "description": "Boilerplate app that gets you up and running with Box Platform and authentication",
   "scripts": {
-    "watch-css": "catw ./styles/foundation-6.4.1/css/*.css ./styles/css/*.css -o public/css/bundle.css -dv",
+    "watch-css": "watchify ./styles/foundation-6.4.1/css/*.css ./styles/css/*.css -o public/css/bundle.css -dv",
     "watch-js": "watchify ./styles/foundation-6.4.1/js/*.js ./styles/js/*.js -o public/js/bundle.js -dv",
     "watch": "npm run watch-css & npm run watch-js",
-    "build-css": "cat ./styles/foundation-6.4.1/css/*.css ./styles/css/*.css > ./public/css/bundle.css",
-    "build-js": "browserify ./styles/foundation-6.4.1/js/*.js ./styles/js/*.js > ./public/js/bundle.js",
+    "build-css": "browserify styles/css/style.js -t scssify > ./public/css/bundle.js",
+    "build-js": "browserify ./styles/foundation-6.4.1/js/foundation.min.js ./styles/foundation-6.4.1/js/jquery.js ./styles/js/*.js > ./public/js/bundle.js",
     "build": "npm run build-css && npm run build-js",
     "start": "npm run build && nodemon app.js",
     "start-dev": "npm run watch & npm start"
@@ -33,6 +33,7 @@
   "devDependencies": {
     "cat": "^0.2.0",
     "catw": "^1.0.1",
+    "scssify": "^2.3.0",
     "watchify": "^3.9.0"
   }
 }
