@@ -20,6 +20,9 @@ $ npm install
 
 Make sure mongoDB is running in a separate terminal tab. This local database is used to store the user objects (including the created App User ID).
 
+```bash
+$ mongod
+```
 
 Start the server.
 
