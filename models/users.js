@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var PassportLocalMongoose = require('passport-local-mongoose');
-var Promise = require('bluebird');
-var async = Promise.coroutine;
+var {coroutine} = require('bluebird');
 
 var BoxUtils = require('../box-service/boxUtils');
 
@@ -15,7 +14,7 @@ var userSchema = new Schema({
 userSchema.plugin(PassportLocalMongoose);
 
 // create new app user and add user to database
-userSchema.statics.newUser = async(function* (user) {
+userSchema.statics.newUser = coroutine(function* (user) {
   var dbUser;
   var newAppUser;
 

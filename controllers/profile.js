@@ -3,18 +3,19 @@
  */
 var express = require('express');
 var router = express.Router();
-var Promise = require('bluebird');
-var async = Promise.coroutine;
+var {props, coroutine} = require('bluebird');
 
 var BoxUtils = require('../box-service/boxUtils');
 
 // fetch app user token and info
-router.get('/', async(function* (req, res) {
-  var appUserInfo;
-
+router.get('/', coroutine(function* (req, res) {
   try {
-    req.user.token = yield BoxUtils.getAppUserToken(req.user.boxId)
-    appUserInfo = yield BoxUtils.getUserInfo(req.user.boxId);
+    var {token, appUserInfo} = yield props({
+      token: BoxUtils.getAppUserToken(req.user.boxId),
+      appUserInfo: BoxUtils.getUserInfo(req.user.boxId)
+    });
+    req.user.token = token
+
     res.render('profile', { user: req.user, appUser: appUserInfo});
   } catch(err) {
     console.log("Error - " + err.response.body.status + ": " + err.response.body.code);
@@ -22,7 +23,7 @@ router.get('/', async(function* (req, res) {
   }
 }));
 
-router.post('/create-folder', async(function* (req, res) {
+router.post('/create-folder', coroutine(function* (req, res) {
   var folderName = req.body.folderName;
   var appUserClient = BoxUtils.appUserClient(req.user.boxId)
 

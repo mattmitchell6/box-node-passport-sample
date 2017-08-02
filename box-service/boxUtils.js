@@ -2,8 +2,7 @@
  *  Box utility methods
  */
 var sdk = require('box-node-sdk');
-var Promise = require('bluebird');
-var async = Promise.coroutine;
+var {coroutine} = require('bluebird');
 
 var BoxSdk = require('./boxSdk');
 var BoxConfig = require('config').boxAppSettings;
@@ -20,7 +19,7 @@ module.exports = {
     return BoxSdk.getAppAuthClient('user', appUserId);
   },
   // create new app user
-  newAppUser: async(function* (username) {
+  newAppUser: coroutine(function* (username) {
     var serviceAccountClient = this.serviceAccountClient();
 
     var appUser = yield serviceAccountClient.enterprise.addAppUser(username, null);
@@ -39,7 +38,7 @@ module.exports = {
     });
   },
   // get current app user info
-  getUserInfo: async(function* (appUserId) {
+  getUserInfo: coroutine(function* (appUserId) {
     var client = this.appUserClient(appUserId);
     return yield client.users.get(client.CURRENT_USER_ID);
   })
