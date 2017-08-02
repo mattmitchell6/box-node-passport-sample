@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var authentication = require('connect-ensure-login');
+var {coroutine} = require('bluebird');
 
 var User = require('../models/users');
 
@@ -20,22 +21,21 @@ router.get('/signup', function(req, res) {
   res.render('signup');
 });
 
-router.post('/signup', function(req, res) {
+router.post('/signup', coroutine(function* (req, res) {
   var userInfo = req.body;
 
-  // create new app user and db user
-  User.newUser(userInfo)
-    .then((user) => {
-      console.log("Successfully created new user");
-      passport.authenticate('local') (req, res, function() {
-        res.redirect('/profile');
-      });
-    })
-    .catch((error) => {
-      console.log("Error could not create user - ", error.message);
-      res.render('signup', {error: error.message});
+  try {
+    // create new app user and db user
+    yield User.newUser(userInfo);
+    console.log("Successfully created new user");
+    passport.authenticate('local') (req, res, function() {
+      res.redirect('/profile');
     });
-});
+  } catch(err) {
+    console.log("Error could not create user - ", err.message);
+    res.render('signup', {error: err.message});
+  }
+}));
 
 router.get('/logout', function(req, res) {
   req.logout();

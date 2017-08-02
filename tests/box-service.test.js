@@ -1,6 +1,5 @@
 var expect = require('expect');
-const Promise = require('bluebird');
-const async = Promise.coroutine;
+var {coroutine} = require('bluebird');
 
 var BoxUtils = require("../box-service/boxUtils");
 const TEST_USER = 'Test User';
@@ -9,9 +8,13 @@ describe('boxUtils', () => {
   var serviceAccountClient;
   var appUser;
 
-  before(async(function* () {
+  before(coroutine(function* () {
     serviceAccountClient = BoxUtils.serviceAccountClient();
     appUser = yield serviceAccountClient.enterprise.addAppUser(TEST_USER, null)
+  }));
+
+  after(coroutine(function* () {
+    yield serviceAccountClient.users.delete(appUser.id, {force: true});
   }));
 
   it('should exist', () => {
@@ -32,7 +35,8 @@ describe('boxUtils', () => {
   });
 
   describe('newAppUser', () => {
-    it('should create new box app user (and delete it)', async(function* () {
+    it('should create new box app user (and delete it)', coroutine(function* () {
+      this.timeout(5000);
       try {
         var appUserId = yield BoxUtils.newAppUser(TEST_USER);
         expect(appUserId).toExist();
@@ -46,15 +50,11 @@ describe('boxUtils', () => {
   });
 
   describe('getAppUserToken', () => {
-    it('should get app user token', async(function* () {
+    it('should get app user token', coroutine(function* () {
       var token = yield BoxUtils.getAppUserToken(appUser.id);
 
       expect(token).toExist();
       expect(token).toBeA('string');
     }));
   });
-
-  after(async(function* () {
-    yield serviceAccountClient.users.delete(appUser.id, {force: true});
-  }));
 });
