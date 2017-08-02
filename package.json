@@ -6,11 +6,13 @@
     "watch": "watchify styles/css/style.js -t scssify styles/js/*.js -o public/bundle.js -dv",
     "build": "browserify styles/css/style.js -t scssify styles/js/*.js > public/bundle.js",
     "start": "npm run build && nodemon app.js",
-    "start-dev": "npm run watch & npm start"
+    "start-dev": "npm run watch & npm start",
+    "test": "mocha tests/**/*.test.js"
   },
   "author": "Matt Mitchell",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "body-parser": "^1.13.3",
     "box-node-sdk": "^1.7.0",
     "browserify": "^14.4.0",
@@ -29,6 +31,8 @@
     "scssify": "^2.3.0"
   },
   "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^3.5.0",
     "watchify": "^3.9.0"
   }
 }

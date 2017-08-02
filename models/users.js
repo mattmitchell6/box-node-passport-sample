@@ -1,43 +1,42 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var PassportLocalMongoose = require('passport-local-mongoose');
+var Promise = require('bluebird');
+var async = Promise.coroutine;
 
 var BoxUtils = require('../box-service/boxUtils');
 
 var userSchema = new Schema({
-    username: String,
-    password: String,
-    boxId: String
+  username: String,
+  password: String,
+  boxId: String
 });
 
 userSchema.plugin(PassportLocalMongoose);
 
 // create new app user and add user to database
-userSchema.statics.newUser = function(user) {
+userSchema.statics.newUser = async(function* (user) {
+  var dbUser;
+  var newAppUser;
+
   // check if user with submitted name exists
-  return User.findOne({username: user.username})
-    .then((user) => {
-      if(user) {
-        throw new Error('user already exists');
-      } else {
-        return;
-      }
-    })
+  dbUser = yield User.findOne({username: user.username});
+  if(dbUser) {
+    throw new Error('user already exists');
+  }
+
   // create Box app user
-  .then(() => {
-    return BoxUtils.newAppUser(user.username);
-  })
+  newAppUser = yield BoxUtils.newAppUser(user.username);
+
   // add new user to database
-  .then((boxAppUserId) => {
-    return new Promise((resolve, reject) => {
-      User.register(
-        new User({username: user.username, boxId: boxAppUserId}), user.password, function(err, user) {
-        if (err) { reject(err); }
-        else { resolve(user); }
-      });
+  return new Promise((resolve, reject) => {
+    User.register(
+      new User({username: user.username, boxId: newAppUser}), user.password, function(err, user) {
+      if (err) { reject(err); }
+      else { resolve(user); }
     });
   });
-}
+});
 
 var User = mongoose.model('User', userSchema);
 

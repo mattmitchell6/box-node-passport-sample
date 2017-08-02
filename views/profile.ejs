@@ -14,12 +14,14 @@
     </p>
 
 		<h4>Box App User (from API call)</h4>
-    <p>
-      id: <%= appUser.id %><br/>
-      name: <%= appUser.name %><br/>
-      login: <%= appUser.login %><br/>
-			created_at: <%= appUser.created_at %><br/>
-    </p>
+		<% if (appUser) { %>
+			<p>
+	      id: <%= appUser.id %><br/>
+	      name: <%= appUser.name %><br/>
+	      login: <%= appUser.login %><br/>
+				created_at: <%= appUser.created_at %><br/>
+	    </p>
+		<% } %>
 
 		<h4>Box Actions</h4>
 		<form action="/profile/create-folder" method="post">
