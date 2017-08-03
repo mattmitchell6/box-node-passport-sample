@@ -9,7 +9,7 @@ module.exports = {
     },
     enterpriseID: ""
   },
-  MongooseConfig: {
+  mongooseConfig: {
     databaseUrl: "mongodb://localhost/box-node-passport"
   }
 }

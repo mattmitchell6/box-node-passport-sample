@@ -6,7 +6,7 @@
     "watch": "watchify styles/css/style.js -t scssify styles/js/*.js -o public/bundle.js -dv",
     "build": "browserify styles/css/style.js -t scssify styles/js/*.js > public/bundle.js",
     "start": "npm run build && nodemon app.js",
-    "start-dev": "npm run watch & npm start",
+    "start-dev": "npm run build && nodemon app.js & npm run watch",
     "test": "mocha tests/**/*.test.js"
   },
   "author": "Matt Mitchell",
@@ -22,7 +22,7 @@
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
-    "mongoose": "^4.10.8",
+    "mongoose": "^4.7.9",
     "nodemon": "^1.11.0",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",

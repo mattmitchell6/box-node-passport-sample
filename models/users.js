@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise; // to supress annoying warning
 var Schema = mongoose.Schema;
 var PassportLocalMongoose = require('passport-local-mongoose');
 var {coroutine} = require('bluebird');
 
 var BoxUtils = require('../box-service/boxUtils');
+const ERROR = 'user already exists'
 
 var userSchema = new Schema({
   username: String,
@@ -21,7 +23,7 @@ userSchema.statics.newUser = coroutine(function* (user) {
   // check if user with submitted name exists
   dbUser = yield User.findOne({username: user.username});
   if(dbUser) {
-    throw new Error('user already exists');
+    throw new Error(ERROR);
   }
 
   // create Box app user

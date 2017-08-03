@@ -14,15 +14,16 @@ router.get('/', coroutine(function* (req, res) {
       token: BoxUtils.getAppUserToken(req.user.boxId),
       appUserInfo: BoxUtils.getUserInfo(req.user.boxId)
     });
+    
     req.user.token = token
-
     res.render('profile', { user: req.user, appUser: appUserInfo});
   } catch(err) {
     console.log("Error - " + err.response.body.status + ": " + err.response.body.code);
-    res.render('profile', { user: req.user, appUser: undefined });
+    res.render('profile', {user: req.user, appUser: undefined});
   }
 }));
 
+// post to create a new Box folder
 router.post('/create-folder', coroutine(function* (req, res) {
   var folderName = req.body.folderName;
   var appUserClient = BoxUtils.appUserClient(req.user.boxId)

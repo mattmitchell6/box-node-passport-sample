@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 
 var strategy = require('./identity-service/passportStrategy.js');
-var MongooseConfig = require('config').MongooseConfig;
+var MongooseConfig = require('config').mongooseConfig;
 
 // Create a new Express application.
 var app = express();

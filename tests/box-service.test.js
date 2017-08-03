@@ -9,6 +9,7 @@ describe('boxUtils', () => {
   var appUser;
 
   before(coroutine(function* () {
+    this.timeout(5000);
     serviceAccountClient = BoxUtils.serviceAccountClient();
     appUser = yield serviceAccountClient.enterprise.addAppUser(TEST_USER, null)
   }));
@@ -55,6 +56,15 @@ describe('boxUtils', () => {
 
       expect(token).toExist();
       expect(token).toBeA('string');
+    }));
+  });
+
+  describe('getUserInfo', () => {
+    it('should get app user info', coroutine(function* () {
+      var userInfo = yield BoxUtils.getUserInfo(appUser.id);
+
+      expect(userInfo).toExist();
+      expect(userInfo.id).toEqual(appUser.id);
     }));
   });
 });
