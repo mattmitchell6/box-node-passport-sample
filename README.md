@@ -2,7 +2,6 @@ Get up and running with this simple Box Platform that uses the [Express](http://
 web framework and [Passport](http://passportjs.org/) to authenticate/manage users.
 
 ## Prerequisites
-[Mongodb](https://treehouse.github.io/installation-guides/mac/mongo-mac.html) - for storing user objects (username, password, Box app user id)
 
 [Browserify](http://browserify.org/) - for bundling custom styling & javascript
 
@@ -12,18 +11,12 @@ Follow the steps below to get the app running on your local machine.
 
 First, clone the repository and install dependencies.
 ```bash
-$ git clone git@git-it.ad.whirl.net:Demo-Engineering/box-node-passport-boilerplate.git
-$ cd box-node-passport-boilerplate
+$ git clone git@git-it.ad.whirl.net:Demo-Engineering/box-node-auth0-boilerplate.git
+$ cd box-node-auth0-boilerplate
 $ npm install
 ```
 
-Create a new custom Box application and add the generated configuration variables (with generated private key) to the local.js file in the config folder (rename local.sample.js to local.js).
-
-Make sure mongoDB is running in a separate terminal tab. This local database is used to store the user objects (including the created box app user id).
-
-```bash
-$ mongod
-```
+Create a new custom Box application (https://developer.box.com/docs/configuring-service-accounts) and add the generated configuration variables (with generated private key) to the local.js file in the config folder (rename local.sample.js to local.js).
 
 Start the server.
 

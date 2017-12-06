@@ -1,40 +1,36 @@
 /**
  * Controller to display user profile
  */
-var express = require('express');
-var router = express.Router();
-var {props, coroutine} = require('bluebird');
+const express = require('express');
+const router = express.Router();
 
-var BoxUtils = require('../box-service/boxUtils');
+const BoxUtils = require('../box-service/boxUtils');
 
-// fetch app user token and info
-router.get('/', coroutine(function* (req, res) {
+// Fetch app user token and info
+router.get('/', async function (req, res) {
   try {
-    var {token, appUserInfo} = yield props({
-      token: BoxUtils.getAppUserToken(req.user.boxId),
-      appUserInfo: BoxUtils.getUserInfo(req.user.boxId)
-    });
-    
-    req.user.token = token
-    res.render('profile', { user: req.user, appUser: appUserInfo});
-  } catch(err) {
-    console.log("Error - " + err.response.body.status + ": " + err.response.body.code);
-    res.render('profile', {user: req.user, appUser: undefined});
-  }
-}));
+    let token = await BoxUtils.getAppUserToken(req.user.boxId)
+    let appUserInfo = await BoxUtils.getUserInfo(req.user.boxId)
 
-// post to create a new Box folder
-router.post('/create-folder', coroutine(function* (req, res) {
-  var folderName = req.body.folderName;
-  var appUserClient = BoxUtils.appUserClient(req.user.boxId)
+    req.user.boxAccessToken = token
+    res.render('pages/profile', { user: req.user, appUser: appUserInfo});
+  } catch(err) {
+    console.log(err);
+    res.redirect('/')
+  }
+});
+
+// Post to create a new Box folder
+router.post('/create-folder', async function (req, res) {
+  let folderName = req.body.folderName;
+  let appUserClient = BoxUtils.appUserClient(req.user.boxId)
 
   try {
-    yield appUserClient.folders.create('0', folderName)
+    await appUserClient.folders.create('0', folderName)
   } catch(err) {
-    console.log("Error - " + err.response.body.status + ": " + err.response.body.code);
+    console.log(err);
   }
-
   res.redirect('/');
-}));
+});
 
 module.exports = router;

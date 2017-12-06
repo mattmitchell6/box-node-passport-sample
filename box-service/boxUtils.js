@@ -1,32 +1,44 @@
 /**
  *  Box utility methods
  */
-var sdk = require('box-node-sdk');
-var {coroutine} = require('bluebird');
+const sdk = require('box-node-sdk');
 
-var BoxSdk = require('./boxSdk');
-var BoxConfig = require('config').boxAppSettings;
+const BoxSdk = require('./boxSdk');
+const BoxConfig = require('config').boxAppSettings;
 
-module.exports = {
+module.exports = class BoxUtils {
+
   // Get the service account client, used to create and manage app user accounts
-  serviceAccountClient: function() {
-    var serviceAccountClient = BoxSdk.getAppAuthClient('enterprise', BoxConfig.enterpriseID);
-
+  static serviceAccountClient() {
+    let serviceAccountClient = BoxSdk.getAppAuthClient('enterprise', BoxConfig.enterpriseID);
     return serviceAccountClient;
-  },
-  // get app user client
-  appUserClient: function(appUserId) {
-    return BoxSdk.getAppAuthClient('user', appUserId);
-  },
-  // create new app user
-  newAppUser: coroutine(function* (username) {
-    var serviceAccountClient = this.serviceAccountClient();
+  }
 
-    var appUser = yield serviceAccountClient.enterprise.addAppUser(username, null);
-    return appUser.id
-  }),
-  // get app user access token
-  getAppUserToken: function(appUserId) {
+  // Get app user client
+  static appUserClient(appUserId) {
+    return BoxSdk.getAppAuthClient('user', appUserId);
+  }
+
+  // Create new app user
+  static async fetchBoxAppUser(username, externalId) {
+    let boxAppUserId
+    let serviceAccountClient = this.serviceAccountClient();
+
+    // fetch app user by external ID
+    let appUsers = await serviceAccountClient.users.get("", {external_app_user_id: externalId})
+
+    // does app user already exist? if not, create one
+    if(appUsers.total_count > 0) {
+      boxAppUserId = appUsers.entries[0].id
+    } else {
+      let newAppUser = await serviceAccountClient.enterprise.addAppUser(username, {external_app_user_id: externalId});
+      boxAppUserId = newAppUser.id
+    }
+    return boxAppUserId
+  }
+
+  // Get app user access token
+  static getAppUserToken(appUserId) {
     return new Promise((resolve, reject) => {
       BoxSdk.getAppUserTokens(appUserId, function(err, tokens) {
         if (err) {
@@ -36,10 +48,11 @@ module.exports = {
         }
       });
     });
-  },
-  // get current app user info
-  getUserInfo: coroutine(function* (appUserId) {
-    var client = this.appUserClient(appUserId);
-    return yield client.users.get(client.CURRENT_USER_ID);
-  })
+  }
+
+  // Get current app user info
+  static async getUserInfo(appUserId) {
+    let client = this.appUserClient(appUserId);
+    return await client.users.get(client.CURRENT_USER_ID, {fields: "external_app_user_id,name,login,created_at"});
+  }
 }

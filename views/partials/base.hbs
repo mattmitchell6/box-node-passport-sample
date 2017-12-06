@@ -1,0 +1,39 @@
+{{!-- layouts/base.hbs --}}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <title>
+        Box Node Boilerplate
+    </title>
+
+    {{#> head-block}}
+      {{!-- Custom <head> goes here --}}
+      {{> head }}
+    {{/head-block}}
+  </head>
+
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text"><a href="/">Box Node.js Boilerplate</a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="dropdown menu" data-dropdown-menu>
+          {{#if user}}
+            <a href="/logout">Log Out</a>
+          {{else}}
+            <a href="/login">Log In</a>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+
+    {{#> content-block}}
+    {{!-- Content goes here --}}
+    {{/content-block}}
+
+  </body>
+</html>

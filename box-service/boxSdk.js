@@ -1,8 +1,8 @@
 /**
  *  Create Box node sdk object
  */
-var BoxSdk = require('box-node-sdk');
-var BoxConfig = require('config').boxAppSettings;
+const BoxSdk = require('box-node-sdk');
+const BoxConfig = require('config').boxAppSettings;
 
 // Set up the Box SDK
 module.exports = new BoxSdk({

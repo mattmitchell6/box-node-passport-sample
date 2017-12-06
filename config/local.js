@@ -9,7 +9,11 @@ module.exports = {
     },
     enterpriseID: "616157"
   },
-  mongooseConfig: {
-    databaseUrl: "mongodb://localhost/box-node-passport"
+  Auth0Config: {
+    webtaskUrl: "https://mmitchell.us.webtask.io/auth0-box-platform/delegation",
+    domain: "mmitchell.auth0.com",
+    clientID: "h2LT04wLosmEUekk1mK6AIy65kkxFBHV",
+    clientSecret: "rMHcRnh9x6AtwdCkg1sn2Z94sU0P6QJazQTlSd7X47UOf-b1xNbhRZ84muqJFQAa",
+    redirectUri: "http://localhost:3000/callback"
   }
 }
