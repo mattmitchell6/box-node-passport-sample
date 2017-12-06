@@ -1,5 +1,5 @@
 Get up and running with this simple Box Platform that uses the [Express](http://expressjs.com/)
-web framework and [Passport](http://passportjs.org/) to authenticate/manage users.
+web framework and [Passport](http://passportjs.org/) + [Auth0](https://auth0.com/) to authenticate/manage users.
 
 ## Prerequisites
 

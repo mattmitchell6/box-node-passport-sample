@@ -11,9 +11,10 @@ const strategy = new Auth0Strategy(
     domain: Auth0Config.domain,
     clientID: Auth0Config.clientID,
     clientSecret: Auth0Config.clientSecret,
-    callbackURL: 'http://localhost:3000/callback'
+    callbackURL: Auth0Config.redirectUri
   },
   async function(accessToken, refreshToken, extraParams, profile, done) {
+    // fetch or create box app user from external auth0 id
     let boxAppUserId = await BoxUtils.fetchBoxAppUser(profile.displayName, profile._json.sub);
 
     profile.boxId = boxAppUserId

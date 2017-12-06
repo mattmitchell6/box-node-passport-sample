@@ -10,3 +10,5 @@ config/local.js
 
 # bundle
 public/bundle.js
+
+package-lock.json
