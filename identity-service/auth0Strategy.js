@@ -24,7 +24,6 @@ const strategy = new Auth0Strategy(
 
 passport.use(strategy);
 
-// This can be used to keep a smaller payload
 passport.serializeUser(function(user, done) {
   done(null, user);
 });

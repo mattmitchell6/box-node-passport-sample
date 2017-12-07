@@ -6,7 +6,7 @@ const router = express.Router();
 
 const BoxUtils = require('../box-service/boxUtils');
 
-// Fetch app user token and info
+// Fetch app user token + info and display
 router.get('/', async function (req, res) {
   try {
     let token = await BoxUtils.getAppUserToken(req.user.boxId)

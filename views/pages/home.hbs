@@ -6,10 +6,22 @@
     <div class="mtm cell auto small-8 medium-6 large-5">
       <h4 class="text-center">Welcome!</h4>
       <div class="text-center">
-         <a class="button hollow"href="/login">Log In</a>
+         <a class="button hollow" onclick="lock.show();">Log In</a>
        </div>
     </div>
   </div>
+
+  <script>
+    var lock = new Auth0Lock('{{auth0Config.clientID}}', '{{auth0Config.domain}}', {
+      auth: {
+        redirectUrl: '{{auth0Config.redirectUri}}',
+        responseType: 'code',
+        params: {
+          scope: 'profile' // Learn about scopes: https://auth0.com/docs/scopes
+        }
+      }
+    });
+  </script>
 
 {{/inline}}
 
