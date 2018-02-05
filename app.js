@@ -3,8 +3,9 @@ const passport = require('passport');
 const path = require('path');
 const exphbs = require('express-handlebars')
 const hbs = require('hbs')
+require('express-async-errors');
 
-const strategy = require('./identity-service/auth0Strategy.js')
+const strategy = require('./service/auth0/auth0Strategy.js')
 
 // Create a new Express application.
 var app = express();
@@ -31,5 +32,11 @@ app.use(passport.session());
 
 // load controllers & routes
 app.use(require('./controllers'));
+
+// error handling
+app.use((err, req, res, next) => {
+	console.log(err);
+	res.render('pages/error', { error: err});
+});
 
 app.listen(3000);

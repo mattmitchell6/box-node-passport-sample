@@ -3,7 +3,7 @@ const Auth0Strategy = require('passport-auth0');
 const Auth0Config = require('config').get('Auth0Config');
 const request = require('request');
 
-const BoxUtils = require('../box-service/boxUtils');
+const BoxUtils = require('../box/boxUtils');
 
 // Configure Passport to use Auth0
 const strategy = new Auth0Strategy(

@@ -38,16 +38,9 @@ module.exports = class BoxUtils {
   }
 
   // Get app user access token
-  static getAppUserToken(appUserId) {
-    return new Promise((resolve, reject) => {
-      BoxSdk.getAppUserTokens(appUserId, function(err, tokens) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(tokens.accessToken);
-        }
-      });
-    });
+  static async getAppUserToken(appUserId) {
+    let newTokens = await BoxSdk.getAppUserTokens(appUserId);
+    return newTokens.accessToken
   }
 
   // Get current app user info

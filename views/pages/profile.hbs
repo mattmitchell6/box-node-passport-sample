@@ -6,12 +6,12 @@
 <div class="grid-x grid-padding-x mtm">
 	<div class="cell small-12 medium-6 large-4">
 
-		<h4>Box App User (from API call)</h4>
+		<h4>Box App User</h4>
 		{{#if appUser}}
 			<p>
+				name: {{appUser.name}}<br/>
 	      box id: {{appUser.id}}<br/>
 				external_app_user_id: {{appUser.external_app_user_id}}<br/>
-	      name: {{appUser.name}}<br/>
 	      login: {{appUser.login}}<br/>
 				created_at: {{appUser.created_at}}<br/>
 	    </p>

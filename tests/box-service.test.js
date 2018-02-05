@@ -1,6 +1,6 @@
 const expect = require('expect');
 
-const BoxUtils = require("../box-service/boxUtils");
+const BoxUtils = require("../service/box/boxUtils");
 const TEST_USER = 'Test User';
 
 describe('boxUtils', () => {
