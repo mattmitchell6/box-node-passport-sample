@@ -2,35 +2,35 @@
 
 {{#*inline "content-block"}}
 
-<h2 class="text-center mtm">Welcome, {{user.displayName}}</h2>
-<div class="grid-x grid-padding-x mtm">
-	<div class="cell small-12 medium-6 large-4">
+<div class="container">
+	<h2 class="text-center mtm">Welcome, {{user.displayName}}</h2>
+	<div class="row">
+		<div class="col col-md-6 col-lg-4 mtm">
+			<h4>Box App User</h4>
+			{{#if appUser}}
+				<p>
+					name: {{appUser.name}}<br/>
+					box id: {{appUser.id}}<br/>
+					external_app_user_id: {{appUser.external_app_user_id}}<br/>
+					login: {{appUser.login}}<br/>
+					created_at: {{appUser.created_at}}<br/>
+				</p>
+			{{/if}}
+			<h4>Box Actions</h4>
+			<form class="form-inline" action="/profile/create-folder" method="post">
+			  <div class="form-group">
+			    <label for="folderName" class="sr-only">Password</label>
+			    <input type="text" name="folderName" class="form-control" id="folderName" placeholder="folder name">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Create Folder</button>
+			</form>
+		</div>
 
-		<h4>Box App User</h4>
-		{{#if appUser}}
-			<p>
-				name: {{appUser.name}}<br/>
-	      box id: {{appUser.id}}<br/>
-				external_app_user_id: {{appUser.external_app_user_id}}<br/>
-	      login: {{appUser.login}}<br/>
-				created_at: {{appUser.created_at}}<br/>
-	    </p>
-		{{/if}}
-
-		<h4>Box Actions</h4>
-		<form action="/profile/create-folder" method="post">
-			<div class="input-group">
-				<input class="input-group-field" placeholder="folder name" type="text" name="folderName">
-		    <div class="input-group-button">
-		      <input type="submit" class="button" value="Create Folder">
-		    </div>
-			</div>
-		</form>
-  </div>
-  <div class="cell auto">
-    <h4>Box Content Explorer (token: {{user.boxAccessToken}})</h4>
-    <div style="height:500px" class="explorer-container"></div>
-  </div>
+		<div class="col col-lg-8 col-md-6 mtm">
+			<h4>Box Content Explorer (token: {{user.boxAccessToken}})</h4>
+			<div style="height:500px" class="explorer-container"></div>
+		</div>
+	</div>
 </div>
 
 <script>

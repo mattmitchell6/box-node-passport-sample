@@ -1,6 +1,6 @@
 {
   "name": "box-node-boilerplate",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Boilerplate app that gets you up and running with Box Platform and user authentication",
   "scripts": {
     "start": "nodemon app.js",

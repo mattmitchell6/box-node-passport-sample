@@ -1,10 +1,6 @@
 Get up and running with this simple Box Platform that uses the [Express](http://expressjs.com/)
 web framework and [Passport](http://passportjs.org/) + [Auth0](https://auth0.com/) to authenticate/manage users.
 
-## Prerequisites
-
-[Browserify](http://browserify.org/) - for bundling custom styling & javascript
-
 ## Instructions
 
 Follow the steps below to get the app running on your local machine.
@@ -21,7 +17,7 @@ Create a new custom Box application (https://developer.box.com/docs/configuring-
 Start the server.
 
 ```bash
-$ npm run start-dev
+$ npm start
 ```
 
 Open a web browser and navigate to [http://localhost:3000/](http://127.0.0.1:3000/)

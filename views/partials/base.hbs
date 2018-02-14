@@ -14,20 +14,20 @@
   </head>
 
   <body>
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li class="menu-text"><a href="/">Box Node.js Boilerplate</a></li>
-        </ul>
-      </div>
-      <div class="top-bar-right">
-        <ul class="dropdown menu" data-dropdown-menu>
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container">
+        <div class="row">
+          <a href="/" class="navbar-brand d-flex align-items-center">
+            Box Node Boilerplate
+          </a>
           {{#if user}}
-            <a href="/logout">Log Out</a>
+            <span class="navbar-text">
+              <a href="/logout">Log Out</a>
+            </span>
           {{/if}}
-        </ul>
+        </div>
       </div>
-    </div>
+    </nav>
 
     {{#> content-block}}
     {{!-- Content goes here --}}
