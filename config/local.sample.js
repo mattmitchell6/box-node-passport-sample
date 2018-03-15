@@ -9,7 +9,7 @@ module.exports = {
     },
     enterpriseID: ""
   },
-  Auth0Config: {
+  auth0Config: {
     domain: "",
     clientID: "",
     clientSecret: "",

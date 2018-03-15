@@ -6,12 +6,14 @@ const router = express.Router();
 const passport = require('passport');
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn('/');
 
-const Auth0Config = require('config').get('Auth0Config');
+const Auth0Config = require('config').auth0Config;
 
 // load routes
 router.use('/profile', ensureLoggedIn, require('./profile'))
 
-// base route
+/**
+ * base route
+ */
 router.get('/', function(req, res) {
   if (req.user) {
     res.redirect('/profile');
@@ -22,14 +24,18 @@ router.get('/', function(req, res) {
   }
 });
 
-// callback from auth0
+/**
+ * callback from auth0
+ */
 router.get('/callback', passport.authenticate('auth0', { failureRedirect: '/'}),
   function(req, res) {
     res.redirect('/profile')
   }
 );
 
-// logout clear session
+/**
+ * logout clear session
+ */
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');

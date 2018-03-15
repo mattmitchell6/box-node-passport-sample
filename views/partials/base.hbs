@@ -16,16 +16,18 @@
   <body>
     <nav class="navbar navbar-dark bg-dark">
       <div class="container">
-        <div class="row">
-          <a href="/" class="navbar-brand d-flex align-items-center">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand">
             Box Node Boilerplate
           </a>
-          {{#if user}}
-            <span class="navbar-text">
-              <a href="/logout">Log Out</a>
-            </span>
-          {{/if}}
         </div>
+        {{#if user}}
+          <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/logout">Log Out</a>
+            </li>
+          </ul>
+        {{/if}}
       </div>
     </nav>
 

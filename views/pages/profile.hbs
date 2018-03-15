@@ -4,6 +4,7 @@
 
 <div class="container">
 	<h2 class="text-center mtm">Welcome, {{user.displayName}}</h2>
+	<hr>
 	<div class="row">
 		<div class="col col-md-6 col-lg-4 mtm">
 			<h4>Box App User</h4>
@@ -24,22 +25,38 @@
 			  </div>
 			  <button type="submit" class="btn btn-primary">Create Folder</button>
 			</form>
+
+			<form method="post" action="profile/upload" enctype="multipart/form-data">
+				<div class="form-group mts">
+					<label id="uploadLabel" for="uploadFile">Upload file</label>
+					<input id="uploadFile" type="file" name="file"/>
+				</div>
+			</form>
 		</div>
 
 		<div class="col col-lg-8 col-md-6 mtm">
-			<h4>Box Content Explorer (token: {{user.boxAccessToken}})</h4>
+			<h4>Box Content Explorer</h4>
+			<p>access token: {{user.boxAccessToken}}</p>
 			<div style="height:500px" class="explorer-container"></div>
 		</div>
 	</div>
 </div>
 
 <script>
-    var folderId = '0';
-    var accessToken = '{{user.boxAccessToken}}';
-    var contentExplorer = new Box.ContentExplorer();
-    contentExplorer.show(folderId, accessToken, {
-      container: '.explorer-container'
-    });
+  var folderId = '0';
+  var accessToken = '{{user.boxAccessToken}}';
+  var contentExplorer = new Box.ContentExplorer();
+	var form = document.getElementById('uploadFile')
+	var uploadLabel = document.getElementById('uploadLabel')
+
+  contentExplorer.show(folderId, accessToken, {
+    container: '.explorer-container'
+  });
+
+	form.onchange = function(event) {
+		uploadLabel.innerHTML = 'Uploading...';
+		this.form.submit();
+	}
 </script>
 
 {{/inline}}
