@@ -8,7 +8,4 @@ npm-debug.log
 #config
 config/local.js
 
-# bundle
-public/bundle.js
-
 package-lock.json

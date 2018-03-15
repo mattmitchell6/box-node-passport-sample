@@ -1,5 +1,5 @@
 /**
- * Controller to display user profile
+ * Controller to display user dashboard
  */
 const express = require('express');
 const router = express.Router();
