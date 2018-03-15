@@ -12,7 +12,7 @@ $ cd box-node-auth0-sample
 $ npm install
 ```
 #### Box Configuration
-Create a new custom Box application (https://developer.box.com/docs/configuring-service-accounts) and add the generated configuration variables (with generated private key) to the local.js file in the config folder (rename local.sample.js to local.js).
+Create a [new Box application](https://developer.box.com/docs/configuring-service-accounts) and add the generated configuration variables (with generated private key) to the local.js file in the config folder (rename local.sample.js to local.js).
 
 #### Auth0 Configuration
 
