@@ -20,7 +20,7 @@ router.get('/', async function (req, res) {
   req.user.boxAccessToken = tokens.accessToken
   let appUserInfo = await appUserClient.users.get(
     appUserClient.CURRENT_USER_ID,
-    {fields: "external_app_user_id,name,login,created_at"}
+    { fields: "external_app_user_id,name,login,created_at"}
   );
 
   res.render('pages/profile', { user: req.user, appUser: appUserInfo});

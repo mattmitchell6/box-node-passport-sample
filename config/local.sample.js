@@ -9,10 +9,7 @@ module.exports = {
     },
     enterpriseID: ""
   },
-  auth0Config: {
-    domain: "",
-    clientID: "",
-    clientSecret: "",
-    redirectUri: "http://localhost:3000/callback"
+  mongooseConfig: {
+    databaseUrl: "mongodb://localhost/box-node-passport"
   }
 }
