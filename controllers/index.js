@@ -6,7 +6,7 @@ const router = express.Router();
 const passport = require('passport');
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn('/');
 
-const Auth0Config = require('config').auth0Config;
+const User = require('../models/users');
 
 // load routes
 router.use('/profile', ensureLoggedIn, require('./profile'))
@@ -18,20 +18,31 @@ router.get('/', function(req, res) {
   if (req.user) {
     res.redirect('/profile');
   } else {
-    res.render('pages/home', {
-      auth0Config: Auth0Config
-    });
+    res.render('pages/home');
   }
 });
 
 /**
- * callback from auth0
+ * log in
  */
-router.get('/callback', passport.authenticate('auth0', { failureRedirect: '/'}),
-  function(req, res) {
-    res.redirect('/profile')
-  }
-);
+router.post('/login', passport.authenticate('local', { failureRedirect: '/' }), function(req, res) {
+  res.redirect('/');
+});
+
+/**
+ * sign up, create new user
+ */
+router.post('/signup', async function(req, res) {
+  let userInfo = req.body;
+
+  // create new box app user and db user
+  await User.newUser(userInfo);
+  console.log("Successfully created new user");
+
+  passport.authenticate('local') (req, res, function() {
+    res.redirect('/profile');
+  });
+});
 
 /**
  * logout clear session

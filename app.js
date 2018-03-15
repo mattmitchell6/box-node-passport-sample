@@ -1,11 +1,13 @@
 const express = require('express');
 const passport = require('passport');
+const mongoose = require('mongoose');
 const path = require('path');
 const exphbs = require('express-handlebars')
 const hbs = require('hbs')
 require('express-async-errors');
 
-const strategy = require('./service/auth0/auth0Strategy.js')
+const strategy = require('./service/passport-local/passportStrategy.js');
+const MongooseConfig = require('config').mongooseConfig;
 
 // Create a new Express application.
 var app = express();
@@ -29,6 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());
 app.use(passport.session());
+
+// mongoose connect
+mongoose.connect(MongooseConfig.databaseUrl);
 
 // load controllers & routes
 app.use(require('./controllers'));
