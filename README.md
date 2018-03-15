@@ -15,9 +15,6 @@ $ npm install
 Create a new custom Box application (https://developer.box.com/docs/configuring-service-accounts) and add the generated configuration variables (with generated private key) to the local.js file in the config folder (rename local.sample.js to local.js).
 
 #### Auth0 Configuration
-Additionally, since you manage the identity and authorization for your Box App Users within your Node Express application, you'll need an identity service to fully utilize JWT authentication on behalf of your App Users.
-
-For that reason, we've included the needed code and setup for an identity service provider named Auth0. You'll need to sign up for a free Auth0 account.
 
 ##### Step 1. Sign up for a free Auth0 account and configure your first client.
 1. Sign up for a free trial account at [Auth0's site](https://auth0.com/).
@@ -30,7 +27,7 @@ For that reason, we've included the needed code and setup for an identity servic
     * Client ID
     * Client Secret
 
-#### Step 2. Add Auth0 configuration values to the Node Express application.
+##### Step 2. Add Auth0 configuration values to the Node Express application.
 1. Navigate to `box-node-auth0-sample` > `config` > `local.js`
 2. In the `local.js` file, replace these values with those from your Auth0 client:
     * Under `module.exports.Auth0Config`
@@ -38,7 +35,7 @@ For that reason, we've included the needed code and setup for an identity servic
     * `clientSecret`
     * `domain`
 
-Start the server.
+#### Start the server
 
 ```bash
 $ npm start
