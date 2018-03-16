@@ -1,6 +1,3 @@
-Get up and running with this simple Box Platform app that uses the [Express](http://expressjs.com/)
-web framework and [Passport](http://passportjs.org/) to authenticate/manage users.
-
 ## Prerequisites
 [Mongodb](https://treehouse.github.io/installation-guides/mac/mongo-mac.html) - for storing user objects (username, password, Box app user id)
 
