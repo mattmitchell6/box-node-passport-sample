@@ -1,7 +1,7 @@
 ## Prerequisites
 [Mongodb](https://treehouse.github.io/installation-guides/mac/mongo-mac.html) - for storing user objects (username, password, Box app user id)
 
-[Node.js (V9)](https://nodejs.org/en/)
+[Node.js (v9)](https://nodejs.org/en/)
 
 ## Instructions
 
