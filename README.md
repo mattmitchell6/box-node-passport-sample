@@ -3,6 +3,7 @@ web framework and [Passport](http://passportjs.org/) to authenticate/manage user
 
 ## Prerequisites
 [Mongodb](https://treehouse.github.io/installation-guides/mac/mongo-mac.html) - for storing user objects (username, password, Box app user id)
+[Node.js (V9)](https://nodejs.org/en/)
 
 ## Instructions
 
@@ -16,6 +17,8 @@ $ npm install
 ```
 
 Create a new [Box application](https://developer.box.com/docs/configuring-service-accounts) and add the generated configuration variables (with generated private key) to the local.js file in the config folder (rename local.sample.js to local.js).
+
+Add the domain, http://localhost:3000 to the list of "Allowed Origins" in the Box Developer Console.
 
 Make sure mongoDB is running in a separate terminal tab. This local database is used to store the user objects (including the created box app user id).
 
