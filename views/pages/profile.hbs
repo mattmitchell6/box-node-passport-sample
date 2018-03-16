@@ -3,7 +3,7 @@
 {{#*inline "content-block"}}
 
 <div class="container">
-	<h2 class="text-center mtm">Welcome, {{user.displayName}}</h2>
+	<h2 class="text-center mtm">Welcome, {{user.username}}</h2>
 	<hr>
 	<div class="row">
 		<div class="col col-md-6 col-lg-4 mtm">
@@ -11,7 +11,7 @@
 			{{#if appUser}}
 				<p>
 					name: {{appUser.name}}<br/>
-					box id: {{appUser.id}}<br/>
+					box user id: {{appUser.id}}<br/>
 					login: {{appUser.login}}<br/>
 					created_at: {{appUser.created_at}}<br/>
 				</p>
