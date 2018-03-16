@@ -1,7 +1,7 @@
 {
-  "name": "box-node-boilerplate",
+  "name": "box-node-passport-sample",
   "version": "1.0.0",
-  "description": "Boilerplate app that gets you up and running with Box Platform and user authentication",
+  "description": "Sample app that gets you up and running with Box Platform and user authentication",
   "scripts": {
     "start": "nodemon app.js"
   },
