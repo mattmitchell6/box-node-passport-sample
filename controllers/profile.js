@@ -18,8 +18,8 @@ router.get('/', async function (req, res) {
 
   // get app user access token and user info
   let tokens = await BoxSdk.getAppUserTokens(req.user.boxId);
-  req.user.boxAccessToken = tokens.accessToken
   let appUserInfo = await appUserClient.users.get(boxUserId, {fields: "name,login,created_at"});
+  req.user.boxAccessToken = tokens.accessToken
 
   res.render('pages/profile', { user: req.user, appUser: appUserInfo});
 });
