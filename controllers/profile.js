@@ -21,7 +21,18 @@ router.get('/', async function (req, res) {
   let appUserInfo = await appUserClient.users.get(boxUserId, {fields: "name,login,created_at"});
   req.user.boxAccessToken = tokens.accessToken
 
-  res.render('pages/profile', { user: req.user, appUser: appUserInfo});
+  // get folder items
+  let folderItems = await appUserClient.folders.getItems('0',
+    {
+      fields: "name,type,modified_at"
+    });
+  folderItems = folderItems.entries
+
+  res.render('pages/profile', {
+    user: req.user,
+    appUser: appUserInfo,
+    items: folderItems
+  });
 });
 
 /**
@@ -60,5 +71,24 @@ router.post('/upload', upload.single('file'), async function (req, res) {
 
   res.redirect('/');
 });
+
+/**
+ * Post to create a new Box folder
+ */
+router.get('/thumbnail/:id', async function(req, res) {
+  let appUserClient = BoxSdk.getAppAuthClient('user', req.user.boxId);
+  let data = await appUserClient.files.getThumbnail(req.params.id)
+
+  if (data.file) {
+    // We got the thumbnail file, so send the image bytes back
+    res.send(data.file);
+  } else if (data.location) {
+    // We got a placeholder URL, so redirect the user there
+    res.redirect(data.location);
+  } else {
+    // Something went wrong, so return a 500
+    res.status(500).end();
+  }
+})
 
 module.exports = router;

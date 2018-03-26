@@ -12,7 +12,6 @@
 				<p>
 					name: {{appUser.name}}<br/>
 					box user id: {{appUser.id}}<br/>
-					login: {{appUser.login}}<br/>
 					created_at: {{appUser.created_at}}<br/>
 				</p>
 			{{/if}}
@@ -33,10 +32,59 @@
 			</form>
 		</div>
 
-		<div class="col col-lg-8 col-md-6 mtm">
-			<h4>Box Content Explorer</h4>
-			<p>access token: {{user.boxAccessToken}}</p>
-			<div style="height:500px" class="explorer-container"></div>
+		<div class="col col-lg-8 col-md-6">
+
+			<div class="row mtm">
+				<ul class="nav nav-pills" id="file-options" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="explorer-tab" data-toggle="pill" href="#explorer" role="tab">Box Content Explorer</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="custom-tab" data-toggle="pill" href="#custom" role="tab">Custom List Files</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="tab-content">
+
+				<!-- Box Content Explorer -->
+				<div class="tab-pane show active mts" role="tabpanel" id="explorer">
+					<p>access token: {{user.boxAccessToken}}</p>
+					<div style="height:500px" class="explorer-container"></div>
+				</div>
+
+				<!-- Custom ui for listing files -->
+				<div class="tab-pane mts" role="tabpanel" id="custom">
+					<table class="mtm table">
+						<thead>
+							<tr>
+								<th scope="col"></th>
+								<th scope="col">Name</th>
+								<th scope="col">Last Modified</th>
+								<th scope="col">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each items as |item|}}
+								<tr>
+									<td>
+										{{#if_file item.type}}
+											<img src="profile/thumbnail/{{item.id}}" alt="" />
+										{{/if_file}}
+										{{#if_folder item.type}}
+											<img src="/img/folder.png" width="32px" alt="" />
+										{{/if_folder}}
+									</td>
+									<td>{{item.name}}</td>
+									<td>{{item.modified_at}}</td>
+									<td>Actions</td>
+								</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>
