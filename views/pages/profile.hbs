@@ -77,7 +77,14 @@
 									</td>
 									<td>{{item.name}}</td>
 									<td>{{item.modified_at}}</td>
-									<td>Actions</td>
+									<td>
+										<div class="dropdown show">
+   										<a href="#" data-toggle="dropdown">list</a>
+     									<div class="dropdown-menu">
+     										<a class="dropdown-item" href="/profile/download/{{item.id}}">Download</a>
+     									</div>
+                  	</div>
+									</td>
 								</tr>
 							{{/each}}
 						</tbody>

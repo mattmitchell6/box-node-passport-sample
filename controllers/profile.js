@@ -73,7 +73,7 @@ router.post('/upload', upload.single('file'), async function (req, res) {
 });
 
 /**
- * Post to create a new Box folder
+ * fetch file thumbnail
  */
 router.get('/thumbnail/:id', async function(req, res) {
   let appUserClient = BoxSdk.getAppAuthClient('user', req.user.boxId);
@@ -89,6 +89,16 @@ router.get('/thumbnail/:id', async function(req, res) {
     // Something went wrong, so return a 500
     res.status(500).end();
   }
+})
+
+/**
+ * download file
+ */
+router.get('/download/:id', async function(req, res) {
+  let appUserClient = BoxSdk.getAppAuthClient('user', req.user.boxId);
+  let downloadUrl = await appUserClient.files.getDownloadURL(req.params.id);
+
+  res.redirect(downloadUrl)
 })
 
 module.exports = router;
