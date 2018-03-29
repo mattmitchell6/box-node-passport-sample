@@ -73,7 +73,7 @@ router.post('/upload', upload.single('file'), async function (req, res) {
 });
 
 /**
- * fetch file thumbnail
+ * Fetch file thumbnail
  */
 router.get('/thumbnail/:id', async function(req, res) {
   let appUserClient = BoxSdk.getAppAuthClient('user', req.user.boxId);
@@ -92,13 +92,23 @@ router.get('/thumbnail/:id', async function(req, res) {
 })
 
 /**
- * download file
+ * Download file
  */
 router.get('/download/:id', async function(req, res) {
   let appUserClient = BoxSdk.getAppAuthClient('user', req.user.boxId);
   let downloadUrl = await appUserClient.files.getDownloadURL(req.params.id);
 
   res.redirect(downloadUrl)
+})
+
+/**
+ * Get file preview link
+ */
+router.get('/preview/:id', async function(req, res) {
+  let appUserClient = BoxSdk.getAppAuthClient('user', req.user.boxId);
+  let previewUrl = await appUserClient.files.getEmbedLink(req.params.id);
+
+  res.redirect(previewUrl)
 })
 
 module.exports = router;

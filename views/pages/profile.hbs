@@ -78,12 +78,15 @@
 									<td>{{item.name}}</td>
 									<td>{{item.modified_at}}</td>
 									<td>
-										<div class="dropdown show">
-   										<a href="#" data-toggle="dropdown">list</a>
-     									<div class="dropdown-menu">
-     										<a class="dropdown-item" href="/profile/download/{{item.id}}">Download</a>
-     									</div>
-                  	</div>
+										{{#if_file item.type}}
+											<div class="dropdown show">
+	   										<a href="#" class="btn btn-secondary dropdown-toggle btn-sm" role="button" data-toggle="dropdown"></a>
+	     									<div class="dropdown-menu">
+	     										<a class="dropdown-item" href="/profile/download/{{item.id}}">Download</a>
+													<a class="dropdown-item" href="/profile/preview/{{item.id}}" data-lity>Preview</a>
+	     									</div>
+	                  	</div>
+										{{/if_file}}
 									</td>
 								</tr>
 							{{/each}}
